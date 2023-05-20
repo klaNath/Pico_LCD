@@ -1,0 +1,159 @@
+
+
+.program ParallelTFT_hsync_clk
+.side_set 1
+
+
+; sideset pin = CLK
+; set pin = HSYNC
+; Blank Period 1+(6+1)*(13+2)+1=107
+; Visible Period (15+1)*(23+2)=400
+; Total Instruction 12
+
+.wrap_target
+public loop_hsync:
+    set y, 6        side 0 [1]
+    set pins, 0     side 1 [1] 
+hline_blank_loop1:
+    set x, 13       side 0 [1]
+hline_blank_loop2:
+    set pins, 1     side 1 [1]
+    jmp x-- hline_blank_loop2 side 0 [1]
+    jmp y-- hline_blank_loop1 side 1 [1]
+    irq set 0       side 0 [1]
+    set y, 15       side 1 [1]
+hline_visible_loop1:
+    set x, 23       side 0 [1]
+hline_visible_loop2:
+    irq clear 0     side 1 [1]
+    jmp x-- hline_visible_loop2 side 0 [1]
+    jmp y-- hline_visible_loop1 side 1 [1]
+.wrap
+
+% c-sdk {
+
+#include "hardware/clocks.h"
+#include "hardware/gpio.h"
+
+static inline void ParallelTFT_hsync_clk_program_init(PIO pio, uint sm, uint offset, uint tft_hsync, uint tft_clk) {
+    pio_sm_config c = ParallelTFT_hsync_clk_program_get_default_config(offset);
+
+    
+    sm_config_set_set_pins(&c, tft_hsync, 1);
+    sm_config_set_sideset_pins(&c, tft_clk);
+
+    // Set the pin direction to output at the PIO
+    uint32_t both_pins = (1u << tft_hsync) | (1u << tft_clk);
+    pio_sm_set_pindirs_with_mask(pio, sm, both_pins, both_pins);
+    pio_sm_set_pins_with_mask(pio, sm, both_pins, both_pins);
+    pio_gpio_init(pio, tft_hsync);
+    pio_gpio_init(pio, tft_clk);
+    
+    float div = (float)clock_get_hz(clk_sys) / (2*1000000);
+    sm_config_set_clkdiv(&c, div);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}
+
+.program ParallelTFT_vsync
+.side_set 1 opt
+
+; sideset pin = VSYNC
+; Blank line 16 
+; Visible line (2+1)*(30+2)=96
+; Total Instruction 10
+
+.wrap_target
+public loop_vsync:
+    set y, 2 [1]
+vsync_visible_loop1:
+    set x, 30 [1]
+vsync_visible_loop2:
+    irq set 1 side 1 [1]
+    wait 0 pin, 21 [1]
+    jmp x-- vsync_visible_loop2 [1]
+    jmp y-- vsync_visible_loop1 [0]
+    irq clear 1 side 0 [3]
+    set x, 15 [1]
+vsync_blank:
+    wait 0 pin, 21 [2] ;It is not good
+    jmp x-- vsync_blank side 1 [7]
+.wrap
+
+% c-sdk {
+
+#include "hardware/clocks.h"
+#include "hardware/gpio.h"
+
+static inline void ParallelTFT_vsync_program_init(PIO pio, uint sm, uint offset, uint tft_vsync) {
+    pio_sm_config c = ParallelTFT_vsync_program_get_default_config(offset);
+
+    sm_config_set_sideset_pins(&c, tft_vsync);
+
+    // Set the pin direction to output at the PIO
+    pio_gpio_init(pio, tft_vsync);
+    pio_sm_set_consecutive_pindirs(pio, sm, tft_vsync, 1, true);
+
+    float div = (float)clock_get_hz(clk_sys) / (2*1000000);
+    sm_config_set_clkdiv(&c, div);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+    }
+%}
+
+.program ParallelTFT_data
+
+; sideset pin = for debug
+; Output pin = 16bit Data, MSB B5...B1 G5...G0 R5...R1 LSB
+; Total Instruction 7
+
+
+    pull block 
+    mov y, osr
+.wrap_target
+    mov x, y
+    wait 1 irq, 1 ; Waiting VSYNC Visible
+    wait 1 irq, 0 [3]; Waiting HSYNC Visible
+d_loop:
+    pull noblock
+    out pins, 16    [1]
+    jmp x-- d_loop 
+.wrap
+
+% c-sdk {
+
+#include "hardware/clocks.h"
+#include "hardware/gpio.h"
+#include "pico/stdlib.h"
+#include <stdio.h>
+
+static inline void ParallelTFT_data_program_init(PIO pio, uint sm, uint offset, uint tft_data) {
+    pio_sm_config c = ParallelTFT_data_program_get_default_config(offset);
+
+    // Set the pin direction to output at the PIO
+    for (uint i = tft_data; i < tft_data + 16; i++){
+        printf("GPIO %d init\n", i);
+        pio_gpio_init(pio, i);
+    }
+    pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 16, true);
+
+    sm_config_set_out_pins(&c, tft_data, 16);
+
+    float div = (float)clock_get_hz(clk_sys) / (2*1000000);
+    sm_config_set_clkdiv(&c, div);
+
+    sm_config_set_out_shift(&c, true, false, 16);
+
+    // Load our configuration, and jump to the start of the program
+    pio_sm_init(pio, sm, offset, &c);
+    // Set the state machine running
+    pio_sm_set_enabled(pio, sm, true);
+    }
+%}
