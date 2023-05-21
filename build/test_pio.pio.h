@@ -48,10 +48,13 @@ static inline pio_sm_config ParallelTFT_hsync_clk_program_get_default_config(uin
     return c;
 }
 
+#define PixClk 1000000
 #include "hardware/clocks.h"
 #include "hardware/gpio.h"
 static inline void ParallelTFT_hsync_clk_program_init(PIO pio, uint sm, uint offset, uint tft_hsync, uint tft_clk) {
     pio_sm_config c = ParallelTFT_hsync_clk_program_get_default_config(offset);
+    gpio_set_drive_strength(tft_hsync, GPIO_DRIVE_STRENGTH_12MA);
+    gpio_set_drive_strength(tft_clk, GPIO_DRIVE_STRENGTH_12MA);
     sm_config_set_set_pins(&c, tft_hsync, 1);
     sm_config_set_sideset_pins(&c, tft_clk);
     // Set the pin direction to output at the PIO
@@ -60,7 +63,7 @@ static inline void ParallelTFT_hsync_clk_program_init(PIO pio, uint sm, uint off
     pio_sm_set_pins_with_mask(pio, sm, both_pins, both_pins);
     pio_gpio_init(pio, tft_hsync);
     pio_gpio_init(pio, tft_clk);
-    float div = (float)clock_get_hz(clk_sys) / (4*2000000);
+    float div = (float)clock_get_hz(clk_sys) / (4*PixClk);
     sm_config_set_clkdiv(&c, div);
     // Load our configuration, and jump to the start of the program
     pio_sm_init(pio, sm, offset, &c);
@@ -89,7 +92,7 @@ static const uint16_t ParallelTFT_vsync_program_instructions[] = {
     0x0081, //  5: jmp    y--, 1                     
     0xd341, //  6: irq    clear 1         side 0 [3] 
     0xe12f, //  7: set    x, 15                  [1] 
-    0x2235, //  8: wait   0 pin, 21              [2] 
+    0x2035, //  8: wait   0 pin, 21                  
     0x1f48, //  9: jmp    x--, 8          side 1 [7] 
             //     .wrap
 };
@@ -112,11 +115,12 @@ static inline pio_sm_config ParallelTFT_vsync_program_get_default_config(uint of
 #include "hardware/gpio.h"
 static inline void ParallelTFT_vsync_program_init(PIO pio, uint sm, uint offset, uint tft_vsync) {
     pio_sm_config c = ParallelTFT_vsync_program_get_default_config(offset);
+    gpio_set_drive_strength(tft_vsync, GPIO_DRIVE_STRENGTH_12MA);
     sm_config_set_sideset_pins(&c, tft_vsync);
     // Set the pin direction to output at the PIO
     pio_gpio_init(pio, tft_vsync);
     pio_sm_set_consecutive_pindirs(pio, sm, tft_vsync, 1, true);
-    float div = (float)clock_get_hz(clk_sys) / (4*2000000);
+    float div = (float)clock_get_hz(clk_sys) / (4*PixClk);
     sm_config_set_clkdiv(&c, div);
     // Load our configuration, and jump to the start of the program
     pio_sm_init(pio, sm, offset, &c);
@@ -166,13 +170,12 @@ static inline pio_sm_config ParallelTFT_data_program_get_default_config(uint off
 static inline void ParallelTFT_data_program_init(PIO pio, uint sm, uint offset, uint tft_data) {
     pio_sm_config c = ParallelTFT_data_program_get_default_config(offset);
     // Set the pin direction to output at the PIO
-    for (uint i = tft_data; i < tft_data + 16; i++){
-        printf("GPIO %d init\n", i);
+    for (uint i = tft_data; i < tft_data + 16; ++i){
         pio_gpio_init(pio, i);
     }
     pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 16, true);
     sm_config_set_out_pins(&c, tft_data, 16);
-    float div = (float)clock_get_hz(clk_sys) / (4*2000000);
+    float div = (float)clock_get_hz(clk_sys) / (4*PixClk);
     sm_config_set_clkdiv(&c, div);
     sm_config_set_out_shift(&c, true, false, 16);
     // Load our configuration, and jump to the start of the program

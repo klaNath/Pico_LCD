@@ -41,9 +41,9 @@ int main() {
 
     while (true) {
         // Blink
-        
+
         if(pio_interrupt_get(pio, 1)){
-            for(uint i = 0; i < FLEXWORKS_HEIGHT * FLEXWORKS_WIDTH; i++){
+            for(uint i = 0; i < (FLEXWORKS_HEIGHT) * FLEXWORKS_WIDTH; i++){
                 pio_sm_put_blocking(pio, sm_d, BMP_LOGO[i]);
             }
         }
