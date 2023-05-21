@@ -170,14 +170,14 @@ static inline pio_sm_config ParallelTFT_data_program_get_default_config(uint off
 static inline void ParallelTFT_data_program_init(PIO pio, uint sm, uint offset, uint tft_data) {
     pio_sm_config c = ParallelTFT_data_program_get_default_config(offset);
     // Set the pin direction to output at the PIO
-    for (uint i = tft_data; i < tft_data + 16; ++i){
+    for (uint i = tft_data; i < tft_data + 15; i++){
         pio_gpio_init(pio, i);
     }
-    pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 16, true);
-    sm_config_set_out_pins(&c, tft_data, 16);
+    pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 15, true);
+    sm_config_set_out_pins(&c, tft_data, 15);
     float div = (float)clock_get_hz(clk_sys) / (4*PixClk);
     sm_config_set_clkdiv(&c, div);
-    sm_config_set_out_shift(&c, true, false, 16);
+    sm_config_set_out_shift(&c, true, false, 15);
     // Load our configuration, and jump to the start of the program
     pio_sm_init(pio, sm, offset, &c);
     // Set the state machine running

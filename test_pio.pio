@@ -135,13 +135,12 @@ d_loop:
 #include "hardware/clocks.h"
 #include "hardware/gpio.h"
 #include "pico/stdlib.h"
-#include <stdio.h>
 
 static inline void ParallelTFT_data_program_init(PIO pio, uint sm, uint offset, uint tft_data) {
     pio_sm_config c = ParallelTFT_data_program_get_default_config(offset);
 
     // Set the pin direction to output at the PIO
-    for (uint i = tft_data; i < tft_data + 16; ++i){
+    for (uint i = tft_data; i < tft_data + 16; i++){
         pio_gpio_init(pio, i);
     }
     pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 16, true);
