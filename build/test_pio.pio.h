@@ -84,8 +84,8 @@ static inline void ParallelTFT_hsync_clk_program_init(PIO pio, uint sm, uint off
 
 static const uint16_t ParallelTFT_vsync_program_instructions[] = {
             //     .wrap_target
-    0xe146, //  0: set    y, 6                   [1] 
-    0xe12c, //  1: set    x, 12                  [1] 
+    0xe142, //  0: set    y, 2                   [1] 
+    0xe13e, //  1: set    x, 30                  [1] 
     0x2135, //  2: wait   0 pin, 21              [1] 
     0xd901, //  3: irq    nowait 1        side 1 [1] 
     0x0142, //  4: jmp    x--, 2                 [1] 
