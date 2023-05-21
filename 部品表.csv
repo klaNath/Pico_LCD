@@ -1,5 +1,5 @@
 Designater, value, Comment
 R1 R2, 51kOhm 1608 size,
 C1 C2 C3, 0.1uF 50V 1608 size, X7R
-VR1, 10kOhm-50kOhm, 3362P Burns type
+VR1, 10kOhm-50kOhm, 3362P Bourns type
 U2, MAU108 +12V -12V DCDC, 絶縁DCDC
