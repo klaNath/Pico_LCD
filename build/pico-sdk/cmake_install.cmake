@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/rp2040/pico-projects/test_pio/build/pico-sdk/tools/cmake_install.cmake")
-  include("D:/rp2040/pico-projects/test_pio/build/pico-sdk/src/cmake_install.cmake")
-  include("D:/rp2040/pico-projects/test_pio/build/pico-sdk/docs/cmake_install.cmake")
+  include("C:/workspace/rp2040/pico-project/Pico_LCD/build/pico-sdk/tools/cmake_install.cmake")
+  include("C:/workspace/rp2040/pico-project/Pico_LCD/build/pico-sdk/src/cmake_install.cmake")
+  include("C:/workspace/rp2040/pico-project/Pico_LCD/build/pico-sdk/docs/cmake_install.cmake")
 
 endif()
 

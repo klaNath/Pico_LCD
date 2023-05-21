@@ -295,7 +295,7 @@
 			[
 				{
 					"backtrace" : 11,
-					"path" : "D:/rp2040/pico-projects/test_pio/build"
+					"path" : "C:/workspace/rp2040/pico-project/Pico_LCD/build"
 				},
 				{
 					"backtrace" : 2,
@@ -311,7 +311,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "D:/rp2040/pico-projects/test_pio/build/generated/pico_base"
+					"path" : "C:/workspace/rp2040/pico-project/Pico_LCD/build/generated/pico_base"
 				},
 				{
 					"backtrace" : 2,
@@ -736,7 +736,7 @@
 			[
 				{
 					"backtrace" : 11,
-					"path" : "D:/rp2040/pico-projects/test_pio/build"
+					"path" : "C:/workspace/rp2040/pico-project/Pico_LCD/build"
 				},
 				{
 					"backtrace" : 2,
@@ -752,7 +752,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "D:/rp2040/pico-projects/test_pio/build/generated/pico_base"
+					"path" : "C:/workspace/rp2040/pico-project/Pico_LCD/build/generated/pico_base"
 				},
 				{
 					"backtrace" : 2,
@@ -1145,7 +1145,7 @@
 			[
 				{
 					"backtrace" : 11,
-					"path" : "D:/rp2040/pico-projects/test_pio/build"
+					"path" : "C:/workspace/rp2040/pico-project/Pico_LCD/build"
 				},
 				{
 					"backtrace" : 2,
@@ -1161,7 +1161,7 @@
 				},
 				{
 					"backtrace" : 2,
-					"path" : "D:/rp2040/pico-projects/test_pio/build/generated/pico_base"
+					"path" : "C:/workspace/rp2040/pico-project/Pico_LCD/build/generated/pico_base"
 				},
 				{
 					"backtrace" : 2,

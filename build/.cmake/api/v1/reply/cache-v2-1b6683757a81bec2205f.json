@@ -195,7 +195,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/rp2040/pico-projects/test_pio/build"
+			"value" : "c:/workspace/rp2040/pico-project/Pico_LCD/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -679,7 +679,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/rp2040/pico-projects/test_pio/build/CMakeFiles/pkgRedirects"
+			"value" : "C:/workspace/rp2040/pico-project/Pico_LCD/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -739,7 +739,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/rp2040/pico-projects/test_pio"
+			"value" : "C:/workspace/rp2040/pico-project/Pico_LCD"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1307,7 +1307,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[C:/Users/kazusa/AppData/Local/Programs/Python/Python310/python.exe][cfound components: Interpreter ][v3.10.7()]"
+			"value" : "[C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/python/python.exe][cfound components: Interpreter ][v3.9.13()]"
 		},
 		{
 			"name" : "PICO_BOARD",
@@ -1463,7 +1463,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : " C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2_common/cmsis C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2040/hardware_regs C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2_common/cmsis C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2040/hardware_regs C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2_common/cmsis C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2040/hardware_regs C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2_common/cmsis C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2040/hardware_regs"
+			"value" : " C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2_common/cmsis C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/pico-sdk/src/rp2040/hardware_regs"
 		},
 		{
 			"name" : "PICO_DOXYGEN_PATHS",
@@ -1691,7 +1691,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/kazusa/AppData/Local/Programs/Python/Python310/python.exe"
+			"value" : "C:/Program Files/Raspberry Pi/Pico SDK v1.5.0/python/python.exe"
 		},
 		{
 			"name" : "_Python3_INTERPRETER_PROPERTIES",
@@ -1703,7 +1703,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Python;3;10;7;32;;;C:\\Users\\kazusa\\AppData\\Local\\Programs\\Python\\Python310\\Lib;C:\\Users\\kazusa\\AppData\\Local\\Programs\\Python\\Python310\\Lib;C:\\Users\\kazusa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages;C:\\Users\\kazusa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages"
+			"value" : "Python;3;9;13;32;;;C:\\Program Files\\Raspberry Pi\\Pico SDK v1.5.0\\python\\Lib;C:\\Program Files\\Raspberry Pi\\Pico SDK v1.5.0\\python\\Lib;C:\\Program Files\\Raspberry Pi\\Pico SDK v1.5.0\\python\\Lib\\site-packages;C:\\Program Files\\Raspberry Pi\\Pico SDK v1.5.0\\python\\Lib\\site-packages"
 		},
 		{
 			"name" : "_Python3_INTERPRETER_SIGNATURE",
@@ -1715,19 +1715,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "f6d520f78cdc10046c550b49282f5612"
-		},
-		{
-			"name" : "_Python3_Interpreter_REASON_FAILURE",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Interpreter reason failure"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
+			"value" : "e58e3a56606953690fa9e2af3e11f0f1"
 		},
 		{
 			"name" : "_Python3_NumPy_REASON_FAILURE",
@@ -1751,7 +1739,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/rp2040/pico-projects/test_pio/build"
+			"value" : "C:/workspace/rp2040/pico-project/Pico_LCD/build"
 		},
 		{
 			"name" : "my_project_IS_TOP_LEVEL",
@@ -1775,7 +1763,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/rp2040/pico-projects/test_pio"
+			"value" : "C:/workspace/rp2040/pico-project/Pico_LCD"
 		},
 		{
 			"name" : "pico-sdk-tools_DIR",
@@ -1799,7 +1787,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/rp2040/pico-projects/test_pio/build/pico-sdk"
+			"value" : "C:/workspace/rp2040/pico-project/Pico_LCD/build/pico-sdk"
 		},
 		{
 			"name" : "pico_sdk_IS_TOP_LEVEL",

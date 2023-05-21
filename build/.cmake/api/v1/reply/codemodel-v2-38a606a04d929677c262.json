@@ -1127,7 +1127,7 @@
 				{
 					"directoryIndex" : 43,
 					"id" : "bs2_default::@bc554eaed616d198a22d",
-					"jsonFile" : "target-bs2_default-Debug-01dfee82f79ba5f6dff0.json",
+					"jsonFile" : "target-bs2_default-Debug-45480853782d8da423d5.json",
 					"name" : "bs2_default",
 					"projectIndex" : 1
 				},
@@ -1155,7 +1155,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "test_pio::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-test_pio-Debug-331f3de354b532dc032b.json",
+					"jsonFile" : "target-test_pio-Debug-666d1b944e461e6ec428.json",
 					"name" : "test_pio",
 					"projectIndex" : 0
 				},
@@ -1186,8 +1186,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/rp2040/pico-projects/test_pio/build",
-		"source" : "D:/rp2040/pico-projects/test_pio"
+		"build" : "C:/workspace/rp2040/pico-project/Pico_LCD/build",
+		"source" : "C:/workspace/rp2040/pico-project/Pico_LCD"
 	},
 	"version" : 
 	{
