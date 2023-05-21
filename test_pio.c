@@ -5,6 +5,10 @@
 //PIO Assemble 
 #include "test_pio.pio.h"
 
+
+//LOGO File
+#include "bmp.h"
+
 int main() {
     const uint LED_PIN = PICO_DEFAULT_LED_PIN;
     stdio_init_all();
@@ -28,6 +32,7 @@ int main() {
     ParallelTFT_data_program_init(pio, sm_d, offset_data, 4);
     pio_sm_put_blocking(pio, sm_d, 399u);
 
+    //クロックと同期信号出力用SMを初期化、有効可する
     ParallelTFT_hsync_clk_program_init(pio, sm_h, offset_hsync, 21, 22);
     ParallelTFT_vsync_program_init(pio, sm_v, offset_vsync, 20);
 
@@ -36,10 +41,11 @@ int main() {
 
     while (true) {
         // Blink
-        gpio_put(LED_PIN, 1);
-        sleep_ms(500);
-
-        gpio_put(LED_PIN, 0);
-        sleep_ms(500);
+        
+        if(pio_interrupt_get(pio, 1)){
+            for(uint i = 0; i < FLEXWORKS_HEIGHT * FLEXWORKS_WIDTH; i++){
+                pio_sm_put_blocking(pio, sm_d, BMP_LOGO[i]);
+            }
+        }
     }
 }

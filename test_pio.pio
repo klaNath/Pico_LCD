@@ -49,7 +49,7 @@ static inline void ParallelTFT_hsync_clk_program_init(PIO pio, uint sm, uint off
     pio_gpio_init(pio, tft_hsync);
     pio_gpio_init(pio, tft_clk);
     
-    float div = (float)clock_get_hz(clk_sys) / (2*1000000);
+    float div = (float)clock_get_hz(clk_sys) / (4*2000000);
     sm_config_set_clkdiv(&c, div);
 
     // Load our configuration, and jump to the start of the program
@@ -98,7 +98,7 @@ static inline void ParallelTFT_vsync_program_init(PIO pio, uint sm, uint offset,
     pio_gpio_init(pio, tft_vsync);
     pio_sm_set_consecutive_pindirs(pio, sm, tft_vsync, 1, true);
 
-    float div = (float)clock_get_hz(clk_sys) / (2*1000000);
+    float div = (float)clock_get_hz(clk_sys) / (4*2000000);
     sm_config_set_clkdiv(&c, div);
 
     // Load our configuration, and jump to the start of the program
@@ -146,7 +146,7 @@ static inline void ParallelTFT_data_program_init(PIO pio, uint sm, uint offset, 
 
     sm_config_set_out_pins(&c, tft_data, 16);
 
-    float div = (float)clock_get_hz(clk_sys) / (2*1000000);
+    float div = (float)clock_get_hz(clk_sys) / (4*2000000);
     sm_config_set_clkdiv(&c, div);
 
     sm_config_set_out_shift(&c, true, false, 16);

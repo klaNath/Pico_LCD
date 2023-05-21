@@ -156,3 +156,11 @@
 11336	12259	7063376215104877	CMakeFiles/test_pio.dir/C_/Program_Files/Raspberry_Pi/Pico_SDK_v1.5.0/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj	2198c9b8717a2dd9
 11639	12349	7063376216011852	CMakeFiles/test_pio.dir/C_/Program_Files/Raspberry_Pi/Pico_SDK_v1.5.0/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj	9a4e138bb964941e
 12349	12879	7063376219106037	test_pio.elf	df3b184d56d00691
+131	221	7063383801291751	test_pio.pio.h	5d2c0981720642b4
+131	221	7063383801291751	C:/workspace/rp2040/pico-project/Pico_LCD/build/test_pio.pio.h	5d2c0981720642b4
+222	928	7063383808078220	CMakeFiles/test_pio.dir/test_pio.c.obj	a85b4d54e28f4836
+930	1938	7063383813986222	test_pio.elf	df3b184d56d00691
+110	197	7063403030800829	test_pio.pio.h	5d2c0981720642b4
+110	197	7063403030800829	C:/workspace/rp2040/pico-project/Pico_LCD/build/test_pio.pio.h	5d2c0981720642b4
+198	1155	7063403040346758	CMakeFiles/test_pio.dir/test_pio.c.obj	a85b4d54e28f4836
+1157	2419	7063403048792630	test_pio.elf	df3b184d56d00691
