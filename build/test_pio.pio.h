@@ -84,10 +84,10 @@ static inline void ParallelTFT_hsync_clk_program_init(PIO pio, uint sm, uint off
 
 static const uint16_t ParallelTFT_vsync_program_instructions[] = {
             //     .wrap_target
-    0xe142, //  0: set    y, 2                   [1] 
-    0xe13e, //  1: set    x, 30                  [1] 
-    0xd901, //  2: irq    nowait 1        side 1 [1] 
-    0x2135, //  3: wait   0 pin, 21              [1] 
+    0xe146, //  0: set    y, 6                   [1] 
+    0xe12c, //  1: set    x, 12                  [1] 
+    0x2135, //  2: wait   0 pin, 21              [1] 
+    0xd901, //  3: irq    nowait 1        side 1 [1] 
     0x0142, //  4: jmp    x--, 2                 [1] 
     0x0081, //  5: jmp    y--, 1                     
     0xd341, //  6: irq    clear 1         side 0 [3] 
@@ -166,18 +166,17 @@ static inline pio_sm_config ParallelTFT_data_program_get_default_config(uint off
 #include "hardware/clocks.h"
 #include "hardware/gpio.h"
 #include "pico/stdlib.h"
-#include <stdio.h>
 static inline void ParallelTFT_data_program_init(PIO pio, uint sm, uint offset, uint tft_data) {
     pio_sm_config c = ParallelTFT_data_program_get_default_config(offset);
     // Set the pin direction to output at the PIO
-    for (uint i = tft_data; i < tft_data + 15; i++){
+    for (uint i = tft_data; i < tft_data + 16; i++){
         pio_gpio_init(pio, i);
     }
-    pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 15, true);
-    sm_config_set_out_pins(&c, tft_data, 15);
+    pio_sm_set_consecutive_pindirs(pio, sm, tft_data, 16, true);
+    sm_config_set_out_pins(&c, tft_data, 16);
     float div = (float)clock_get_hz(clk_sys) / (4*PixClk);
     sm_config_set_clkdiv(&c, div);
-    sm_config_set_out_shift(&c, true, false, 15);
+    sm_config_set_out_shift(&c, true, false, 16);
     // Load our configuration, and jump to the start of the program
     pio_sm_init(pio, sm, offset, &c);
     // Set the state machine running
