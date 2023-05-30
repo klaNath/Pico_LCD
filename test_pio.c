@@ -39,13 +39,35 @@ int main() {
     //各SMのクロック分周器を同期させる。
     pio_enable_sm_mask_in_sync(pio, (1u << sm_h) | (1u << sm_v)| (1u << sm_d));
 
+    sleep_ms(500);
     while (true) {
-        // Blink
+        pio_sm_clear_fifos(pio, sm_d);
 
         if(pio_interrupt_get(pio, 1)){
-            for(uint i = 0; i < (FLEXWORKS_HEIGHT) * FLEXWORKS_WIDTH; i++){
-                pio_sm_put_blocking(pio, sm_d, BMP_LOGO[i]);
+            for(uint16_t idx = 0; idx < (TEST_HEIGHT ) * TEST_WIDTH; idx++){
+                uint16_t elm = 0;
+                switch (((idx % 400)/ 40) % 3)
+                {
+                case 0:
+                    elm = 0b0000000000011111;
+                    break;
+                case 1:
+                    elm = 0b0000011111100000;
+                    break;
+                case 2:
+                    elm = 0b1111100000000000;
+                    break;
+                default:
+                    break;
+                }
+                if(idx >= (TEST_HEIGHT-1) * TEST_WIDTH) {
+                    pio_sm_put_blocking(pio, sm_d, 0u);
+                }else{
+                    pio_sm_put_blocking(pio, sm_d, elm);
+                }
             }
+            while(!pio_interrupt_get(pio, 2))
         }
+
     }
 }
